@@ -45,7 +45,7 @@ const Footer = () => {
               <div className="flex items-start gap-3">
                 <Phone className="w-5 h-5 mt-1 flex-shrink-0" />
                 <div>
-                  <p className="text-white/90">(83) 98865-2004 - Atendimento</p>
+                  <p className="text-white/90">(98) 98477-7834 - Atendimento</p>
                 </div>
               </div>
             </div>
@@ -56,7 +56,8 @@ const Footer = () => {
         <div className="mb-8">
           <h3 className="text-lg font-bold mb-4">Nosso endereço</h3>
           <div className="space-y-2 text-white/90">
-            <p>Rua Nilo Peçanha, 1244</p>
+            <p>Av dos Holandeses Nº4</p>
+            <p>Bairro: Calhau</p>
           </div>
         </div>
 
