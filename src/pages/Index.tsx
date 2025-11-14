@@ -27,7 +27,7 @@ const Index = () => {
     }
     
     if ((window as any).fbq) {
-      (window as any).fbq('init', '32891565970427137');
+      (window as any).fbq('init', '1343589720893639');
       (window as any).fbq('track', 'PageView');
     }
   }, []);
