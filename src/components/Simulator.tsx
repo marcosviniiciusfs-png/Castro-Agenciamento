@@ -153,14 +153,14 @@ const Simulator = () => {
                 <SelectTrigger className="w-full text-lg p-6">
                   <SelectValue placeholder="Selecione o tipo de bem" />
                 </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Imóvel">Imóvel</SelectItem>
-                  <SelectItem value="Veículo">Veículo</SelectItem>
-                  <SelectItem value="Moto">Moto</SelectItem>
-                  <SelectItem value="Caminhão">Caminhão</SelectItem>
-                  <SelectItem value="Maquinário">Maquinário</SelectItem>
-                  <SelectItem value="Construção">Construção</SelectItem>
-                  <SelectItem value="Investimento">Investimento</SelectItem>
+                <SelectContent translate="no">
+                  <SelectItem value="Imóvel" translate="no">Imóvel</SelectItem>
+                  <SelectItem value="Veículo" translate="no">Veículo</SelectItem>
+                  <SelectItem value="Moto" translate="no">Moto</SelectItem>
+                  <SelectItem value="Caminhão" translate="no">Caminhão</SelectItem>
+                  <SelectItem value="Maquinário" translate="no">Maquinário</SelectItem>
+                  <SelectItem value="Construção" translate="no">Construção</SelectItem>
+                  <SelectItem value="Investimento" translate="no">Investimento</SelectItem>
                 </SelectContent>
               </Select>
             </div>
