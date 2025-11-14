@@ -159,6 +159,8 @@ const Simulator = () => {
                   <SelectItem value="Moto">Moto</SelectItem>
                   <SelectItem value="Caminhão">Caminhão</SelectItem>
                   <SelectItem value="Maquinário">Maquinário</SelectItem>
+                  <SelectItem value="Construção">Construção</SelectItem>
+                  <SelectItem value="Investimento">Investimento</SelectItem>
                 </SelectContent>
               </Select>
             </div>
