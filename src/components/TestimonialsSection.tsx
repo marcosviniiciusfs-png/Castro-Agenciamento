@@ -20,7 +20,7 @@ import cliente10 from "@/assets/cliente-contemplado-10.png";
 import cliente11 from "@/assets/cliente-contemplado-11.png";
 
 const TestimonialsSection = () => {
-  const clientImages = [cliente1, cliente2, cliente3, cliente4, cliente9, cliente8, cliente6, cliente7, cliente11, cliente5, cliente10];
+  const clientImages = [cliente1, cliente2, cliente3, cliente4, cliente9, cliente8, cliente6, cliente7, cliente5, cliente11, cliente10];
 
   return (
     <section className="py-20 bg-gradient-to-b from-blue-50 to-white">
