@@ -53,13 +53,13 @@ const Footer = () => {
         </div>
 
         {/* Endereço */}
-        <div className="mb-8">
-          <h3 className="text-lg font-bold mb-4">Nosso endereço</h3>
-          <div className="space-y-2 text-white/90">
-            <p>Av dos Holandeses Nº4</p>
-            <p>Bairro: Calhau</p>
-          </div>
-        </div>
+         <div className="mb-8">
+           <h3 className="text-lg font-bold mb-4">Nosso endereço</h3>
+           <div className="space-y-2 text-white/90">
+             <p>Avenida Nereu Bittencourt, número 351</p>
+             <p>Centro - Caxias-MA</p>
+           </div>
+         </div>
 
         <div className="border-t border-white/20 pt-6 text-center">
           <p className="text-white/80 text-sm">
