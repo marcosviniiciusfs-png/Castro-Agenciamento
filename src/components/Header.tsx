@@ -62,7 +62,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-[#010010] border-t border-border/20">
+        <div className="md:hidden bg-[#0a0c19] border-t border-border/20">
           <nav className="container mx-auto px-4 py-4 flex flex-col gap-4">
             <button
               onClick={() => scrollToSection("inicio")}
