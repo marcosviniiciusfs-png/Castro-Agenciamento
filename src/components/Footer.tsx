@@ -1,5 +1,5 @@
 import { Phone, Instagram } from "lucide-react";
-import trajanoAbreuLogo from "@/assets/trajano-abreu-logo.png";
+import castroLogo from "@/assets/castro-logo.png";
 
 const Footer = () => {
   return (
