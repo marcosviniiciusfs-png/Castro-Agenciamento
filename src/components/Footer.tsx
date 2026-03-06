@@ -14,29 +14,29 @@ const Footer = () => {
           </div>
 
           {/* Social */}
-          <div>
-            <h3 className="text-lg font-bold mb-4">Social</h3>
-            <div className="flex gap-3">
-              <a 
-                href="https://www.instagram.com/t.aempreendimentos?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a 
-                href="https://www.instagram.com/t.aempreendimentos?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-            </div>
-          </div>
+           <div>
+             <h3 className="text-lg font-bold mb-4">Social</h3>
+             <div className="flex gap-3">
+               <a 
+                 href="https://www.instagram.com/castroagenciamento?fbclid=IwY2xjawQX8edleHRuA2FlbQIxMABicmlkETFMZXRJdWdBbjJrd3prSGVLc3J0YwZhcHBfaWQPNTE0NzcxNTY5MjI4MDYxAAEegmbIA59TBbEQu5BmPLbAG39rDXJVRM2OQU5t8x5EuNIV8iQFm1aS0rFz9n4_aem_wJHUrKXUO40ZOAaq-FNOpg" 
+                 target="_blank" 
+                 rel="noopener noreferrer"
+                 className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+                 aria-label="Instagram"
+               >
+                 <Instagram className="w-5 h-5" />
+               </a>
+               <a 
+                 href="https://www.facebook.com/castroagenciamento" 
+                 target="_blank" 
+                 rel="noopener noreferrer"
+                 className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+                 aria-label="Facebook"
+               >
+                 <Facebook className="w-5 h-5" />
+               </a>
+             </div>
+           </div>
 
           {/* Fale Conosco */}
           <div>
