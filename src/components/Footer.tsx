@@ -1,4 +1,4 @@
-import { Phone, Instagram } from "lucide-react";
+import { Phone, Instagram, Facebook } from "lucide-react";
 import castroLogo from "@/assets/castro-logo.png";
 
 const Footer = () => {
