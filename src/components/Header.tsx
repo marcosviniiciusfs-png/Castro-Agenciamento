@@ -15,7 +15,7 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#010010] border-b border-border/20 shadow-sm">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#0a0c19] border-b border-border/20 shadow-sm">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center">
           <img src={castroLogo} alt="AC Castro Agenciamento" className="h-12 w-auto" />
