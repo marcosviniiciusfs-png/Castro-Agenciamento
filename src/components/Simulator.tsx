@@ -112,7 +112,7 @@ const Simulator = () => {
       };
 
       // Enviar para ambos webhooks em paralelo
-      await Promise.allSettled([
+      const results = await Promise.allSettled([
         fetch("https://hook.us1.make.com/9g1zruupku13436nq7iblwt3owbypyqc", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -120,10 +120,24 @@ const Simulator = () => {
         }),
         fetch("https://uxttihjsxfowursjyult.supabase.co/functions/v1/form-webhook/65d8726823a8aa81ba15f5f9554ecc553785431eeedc7d443ef51dce5e1e5a5e", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "x-supabase-client-platform": "web",
+            "x-supabase-client-platform-version": "1.0.0",
+          },
           body: JSON.stringify(webhookData),
         }),
       ]);
+
+      // Log resultados para diagnóstico
+      results.forEach((result, index) => {
+        const name = index === 0 ? "Make.com" : "Supabase";
+        if (result.status === "fulfilled") {
+          console.log(`${name} webhook: ${result.value.status} ${result.value.statusText}`);
+        } else {
+          console.error(`${name} webhook falhou:`, result.reason);
+        }
+      });
 
       toast({
         title: "Simulação enviada!",
