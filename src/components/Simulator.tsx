@@ -115,13 +115,14 @@ const Simulator = () => {
       const crmFormData = new FormData();
       crmFormData.append("Nome", formData.fullName);
       crmFormData.append("Telefone", formData.whatsapp);
-      crmFormData.append("Selecione o tipo de bem", formData.propertyType);
+      crmFormData.append("Qual tipo de bem você deseja adquirir?", formData.propertyType.toUpperCase());
       crmFormData.append("Qual o valor do crédito que deseja simular?", formData.creditAmount);
-      crmFormData.append("Tem valor de entrada?", formData.hasDownPayment);
+      crmFormData.append("Tem valor de entrada?", formData.hasDownPayment === "Sim" ? "SIM" : "NAO");
       crmFormData.append("Qual valor de entrada disponível?", formData.hasDownPayment === "Sim" ? formData.downPaymentAmount : "");
       crmFormData.append("Qual a parcela mensal ideal pra você?", formData.monthlyPayment);
       crmFormData.append("Qual cidade você reside?", formData.city);
       crmFormData.append("Nome completo", formData.fullName);
+      crmFormData.append("WhatsApp para contato", formData.whatsapp);
 
       // Capturar UTMs da URL
       const urlParams = new URLSearchParams(window.location.search);
@@ -145,7 +146,7 @@ const Simulator = () => {
           method: "POST",
           mode: "cors",
           headers: {
-            "Authorization": "Bearer NjA2ZmFmYWEtZGE3Mi00NWMyLWJiYTAtMzVkY2U4YjliYTQ3OjE3NzQzNjA5MzU=",
+            "Authorization": "Bearer NDFhYTlhNjUtMGFhZC00YjUxLTg4ZmUtZmM3ZjYwYmYwMDE3OjE3NzQzNzg2Mjk=",
           },
           body: crmFormData,
         }),
