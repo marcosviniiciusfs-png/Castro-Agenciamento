@@ -146,7 +146,7 @@ const Simulator = () => {
           method: "POST",
           mode: "cors",
           headers: {
-            "Authorization": "Bearer NjA2ZmFmYWEtZGE3Mi00NWMyLWJiYTAtMzVkY2U4YjliYTQ3OjE3NzQzNjA5MzU=",
+            "Authorization": "Bearer NDFhYTlhNjUtMGFhZC00YjUxLTg4ZmUtZmM3ZjYwYmYwMDE3OjE3NzQzNzg2Mjk=",
           },
           body: crmFormData,
         }),
