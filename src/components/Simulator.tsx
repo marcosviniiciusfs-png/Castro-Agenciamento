@@ -111,7 +111,25 @@ const Simulator = () => {
         "Cidade": formData.city
       };
 
-      // Enviar para ambos webhooks em paralelo
+      // Preparar FormData para o CRM
+      const crmFormData = new FormData();
+      crmFormData.append("Nome", formData.fullName);
+      crmFormData.append("Telefone", formData.whatsapp);
+      crmFormData.append("Selecione o tipo de bem", formData.propertyType);
+      crmFormData.append("Qual o valor do crédito que deseja simular?", formData.creditAmount);
+      crmFormData.append("Tem valor de entrada?", formData.hasDownPayment);
+      crmFormData.append("Qual valor de entrada disponível?", formData.hasDownPayment === "Sim" ? formData.downPaymentAmount : "");
+      crmFormData.append("Qual a parcela mensal ideal pra você?", formData.monthlyPayment);
+      crmFormData.append("Qual cidade você reside?", formData.city);
+      crmFormData.append("Nome completo", formData.fullName);
+
+      // Capturar UTMs da URL
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get("utm_source")) crmFormData.append("UTMSource", urlParams.get("utm_source")!);
+      if (urlParams.get("utm_medium")) crmFormData.append("UTMMedium", urlParams.get("utm_medium")!);
+      if (urlParams.get("utm_campaign")) crmFormData.append("UTMCampaing", urlParams.get("utm_campaign")!);
+
+      // Enviar para os três destinos em paralelo
       const results = await Promise.allSettled([
         fetch("https://hook.us1.make.com/9g1zruupku13436nq7iblwt3owbypyqc", {
           method: "POST",
@@ -123,11 +141,20 @@ const Simulator = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(webhookData),
         }),
+        fetch("https://app.crmdeconsorcio.com.br/api/v1/Integracao/Formulario", {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Authorization": "Bearer NjA2ZmFmYWEtZGE3Mi00NWMyLWJiYTAtMzVkY2U4YjliYTQ3OjE3NzQzNjA5MzU=",
+          },
+          body: crmFormData,
+        }),
       ]);
 
       // Log resultados para diagnóstico
+      const destinations = ["Make.com", "Supabase", "CRM"];
       results.forEach((result, index) => {
-        const name = index === 0 ? "Make.com" : "Supabase";
+        const name = destinations[index];
         if (result.status === "fulfilled") {
           console.log(`${name} webhook: ${result.value.status} ${result.value.statusText}`);
         } else {
