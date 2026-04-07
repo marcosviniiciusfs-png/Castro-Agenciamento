@@ -130,7 +130,19 @@ const Simulator = () => {
       if (urlParams.get("utm_medium")) crmFormData.append("UTMMedium", urlParams.get("utm_medium")!);
       if (urlParams.get("utm_campaign")) crmFormData.append("UTMCampaing", urlParams.get("utm_campaign")!);
 
-      // Enviar para os três destinos em paralelo
+      // Preparar payload JSON para o ConvexCRM
+      const convexData = {
+        nome: formData.fullName,
+        telefone: formData.whatsapp.replace(/\D/g, ""),
+        tipo: "IMOVEL",
+        valor_credito: formData.creditAmount,
+        tem_entrada: formData.hasDownPayment === "Sim" ? "SIM" : "NAO",
+        valor_entrada: formData.hasDownPayment === "Sim" ? formData.downPaymentAmount : "",
+        parcela_mensal: formData.monthlyPayment,
+        cidade: formData.city,
+      };
+
+      // Enviar para os quatro destinos em paralelo
       const results = await Promise.allSettled([
         fetch("https://hook.us1.make.com/9g1zruupku13436nq7iblwt3owbypyqc", {
           method: "POST",
@@ -150,10 +162,18 @@ const Simulator = () => {
           },
           body: crmFormData,
         }),
+        fetch("https://app.convexcrm.com.br/api/webhooks/integrations/e6c912d0db91400d867d1a4151917f1f", {
+          method: "POST",
+          headers: {
+            "Authorization": "Bearer whi_odJaxq5NdTefWkl2LxEILlItDIwbwquv",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(convexData),
+        }),
       ]);
 
       // Log resultados para diagnóstico
-      const destinations = ["Make.com", "Supabase", "CRM"];
+      const destinations = ["Make.com", "Supabase", "CRM", "ConvexCRM"];
       results.forEach((result, index) => {
         const name = destinations[index];
         if (result.status === "fulfilled") {
