@@ -164,10 +164,7 @@ const Simulator = () => {
         }),
         fetch("https://app.convexcrm.com.br/api/webhooks/integrations/e6c912d0db91400d867d1a4151917f1f", {
           method: "POST",
-          headers: {
-            "Authorization": "Bearer whi_odJaxq5NdTefWkl2LxEILlItDIwbwquv",
-            "Content-Type": "application/json",
-          },
+          mode: "no-cors",
           body: JSON.stringify(convexData),
         }),
       ]);
