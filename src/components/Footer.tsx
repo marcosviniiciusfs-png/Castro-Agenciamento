@@ -65,6 +65,7 @@ const Footer = () => {
           <p className="text-white/80 text-sm">
             Copyright 2025 - Todos os direitos reservados por SimuLead
           </p>
+          <p className="text-white/30 text-xs mt-1">v2025.04.07</p>
         </div>
       </div>
     </footer>
