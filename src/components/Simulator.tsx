@@ -139,11 +139,13 @@ const Simulator = () => {
         nome: formData.fullName,
         telefone: formData.whatsapp.replace(/\D/g, ""),
         tipo: "IMOVEL",
-        valor_credito: formData.creditAmount,
-        tem_entrada: formData.hasDownPayment === "Sim" ? "SIM" : "NAO",
-        valor_entrada: formData.hasDownPayment === "Sim" ? formData.downPaymentAmount : "",
-        parcela_mensal: formData.monthlyPayment,
+        interesse: formData.propertyType,
+        quanto_tempo: "",
+        credito: formData.creditAmount,
+        entrada_disponivel: formData.hasDownPayment === "Sim" ? formData.downPaymentAmount : "NAO",
+        parcela_ideal: formData.monthlyPayment,
         cidade: formData.city,
+        whatsapp: formData.whatsapp.replace(/\D/g, ""),
       };
 
       // Enviar para os quatro destinos em paralelo

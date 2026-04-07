@@ -3,8 +3,8 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
-const CONVEX_URL = "https://app.convexcrm.com.br/api/webhooks/integrations/e6c912d0db91400d867d1a4151917f1f";
-const CONVEX_TOKEN = "whi_odJaxq5NdTefWkl2LxEILlItDIwbwquv";
+const CONVEX_URL = "https://app.convexcrm.com.br/api/webhooks/integrations/dde2b70b777f46c98620a11c3ad8264f";
+const CONVEX_TOKEN = "whi_g9GnwzPcIpCVx2I6tP5lrSk4wBqcWwEe";
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
