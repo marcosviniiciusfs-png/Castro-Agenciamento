@@ -201,6 +201,7 @@ const Simulator = () => {
         description: "Por favor, tente novamente.",
         variant: "destructive",
       });
+      setIsSubmitting(false);
     }
   };
 
