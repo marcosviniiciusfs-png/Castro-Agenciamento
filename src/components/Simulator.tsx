@@ -173,7 +173,12 @@ const Simulator = () => {
       results.forEach((result, index) => {
         const name = destinations[index];
         if (result.status === "fulfilled") {
-          console.log(`${name} webhook: ${result.value.status} ${result.value.statusText}`);
+          const val = result.value;
+          if (val instanceof Response) {
+            console.log(`${name} webhook: ${val.status} ${val.statusText}`);
+          } else {
+            console.log(`${name} webhook:`, val.error ? `error: ${val.error.message}` : "ok");
+          }
         } else {
           console.error(`${name} webhook falhou:`, result.reason);
         }
