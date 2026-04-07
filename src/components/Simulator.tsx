@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -162,10 +163,8 @@ const Simulator = () => {
           },
           body: crmFormData,
         }),
-        fetch("https://app.convexcrm.com.br/api/webhooks/integrations/e6c912d0db91400d867d1a4151917f1f", {
-          method: "POST",
-          mode: "no-cors",
-          body: JSON.stringify(convexData),
+        supabase.functions.invoke("convex-proxy", {
+          body: convexData,
         }),
       ]);
 
@@ -174,7 +173,12 @@ const Simulator = () => {
       results.forEach((result, index) => {
         const name = destinations[index];
         if (result.status === "fulfilled") {
-          console.log(`${name} webhook: ${result.value.status} ${result.value.statusText}`);
+          const val = result.value;
+          if (val instanceof Response) {
+            console.log(`${name} webhook: ${val.status} ${val.statusText}`);
+          } else {
+            console.log(`${name} webhook:`, val.error ? `error: ${val.error.message}` : "ok");
+          }
         } else {
           console.error(`${name} webhook falhou:`, result.reason);
         }
