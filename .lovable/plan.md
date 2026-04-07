@@ -1,31 +1,63 @@
 
 
-## Plano: Atualizar integração CRM com novos campos e token
+## Plano: Adicionar webhook ConvexCRM como 4o destino de leads
+
+### O que será feito
+
+Adicionar um quarto envio paralelo no `handleFinish` do simulador para a API do ConvexCRM, usando JSON com Bearer token.
 
 ### Alterações em `src/components/Simulator.tsx`
 
-**1. Atualizar campos do FormData (linhas 116-124):**
-- Mudar `"Selecione o tipo de bem"` → `"Qual tipo de bem você deseja adquirir?"`
-- Converter valores do tipo de bem para UPPERCASE (o mapeamento depende dos valores atuais no simulador)
-- Mudar resposta de entrada `"Sim"/"Não"` → `"SIM"/"NAO"`
-- Adicionar novo campo `"WhatsApp para contato"` com `formData.whatsapp`
+**1. Preparar payload JSON para o ConvexCRM (após linha 131):**
 
-**2. Atualizar Bearer token (linha 148):**
-- De: `NjA2ZmFmYWEtZGE3Mi00NWMyLWJiYTAtMzVkY2U4YjliYTQ3OjE3NzQzNjA5MzU=`
-- Para: `NDFhYTlhNjUtMGFhZC00YjUxLTg4ZmUtZmM3ZjYwYmYwMDE3OjE3NzQzNzg2Mjk=`
+```typescript
+const convexData = {
+  nome: formData.fullName,
+  telefone: formData.whatsapp.replace(/\D/g, ""),
+  tipo: "IMOVEL",
+  valor_credito: formData.creditAmount,
+  tem_entrada: formData.hasDownPayment === "Sim" ? "SIM" : "NAO",
+  valor_entrada: formData.hasDownPayment === "Sim" ? formData.downPaymentAmount : "",
+  parcela_mensal: formData.monthlyPayment,
+  cidade: formData.city,
+};
+```
 
-### Mapeamento atualizado
+**2. Adicionar 4o fetch no `Promise.allSettled` (após linha 152):**
 
-| Campo CRM | Valor |
-|---|---|
-| Nome | fullName |
-| Telefone | whatsapp |
-| Qual tipo de bem você deseja adquirir? | propertyType (UPPERCASE) |
-| Qual o valor do crédito que deseja simular? | creditAmount |
-| Tem valor de entrada? | SIM / NAO |
-| Qual valor de entrada disponível? | downPaymentAmount |
-| Qual a parcela mensal ideal pra você? | monthlyPayment |
-| Qual cidade você reside? | city |
-| Nome completo | fullName |
-| WhatsApp para contato | whatsapp |
+```typescript
+fetch("https://app.convexcrm.com.br/api/webhooks/integrations/e6c912d0db91400d867d1a4151917f1f", {
+  method: "POST",
+  headers: {
+    "Authorization": "Bearer whi_odJaxq5NdTefWkl2LxEILlItDIwbwquv",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(convexData),
+}),
+```
+
+**3. Atualizar array de destinos para logging (linha 156):**
+
+```typescript
+const destinations = ["Make.com", "Supabase", "CRM", "ConvexCRM"];
+```
+
+### Mapeamento de campos
+
+| Campo JSON | Valor | Nota |
+|---|---|---|
+| nome | fullName | |
+| telefone | whatsapp (só números) | |
+| tipo | "IMOVEL" | Valor fixo conforme solicitado |
+| valor_credito | creditAmount | |
+| tem_entrada | SIM / NAO | |
+| valor_entrada | downPaymentAmount | |
+| parcela_mensal | monthlyPayment | |
+| cidade | city | |
+
+### Notas
+- O token é público (visível nas screenshots), será incluído diretamente no código.
+- A API espera `Content-Type: application/json` e Bearer token nos headers.
+- A validação dos campos obrigatórios já existe no simulador (`canProceed()`).
+- Erros são tratados via `Promise.allSettled` + toast de erro existente.
 
