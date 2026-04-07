@@ -29,6 +29,7 @@ interface SimulatorData {
 
 const Simulator = () => {
   const [currentStep, setCurrentStep] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
   const [formData, setFormData] = useState<SimulatorData>({
@@ -92,6 +93,8 @@ const Simulator = () => {
   };
 
   const handleFinish = async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
     try {
       // Formatar data no formato YYYY-MM-DD
       const now = new Date();
@@ -198,6 +201,7 @@ const Simulator = () => {
         description: "Por favor, tente novamente.",
         variant: "destructive",
       });
+      setIsSubmitting(false);
     }
   };
 
@@ -418,10 +422,10 @@ const Simulator = () => {
               ) : (
                 <Button
                   onClick={handleFinish}
-                  disabled={!canProceed()}
+                  disabled={!canProceed() || isSubmitting}
                   className="bg-primary hover:bg-primary-hover px-8 py-6 text-base font-semibold"
                 >
-                  Finalizar Simulação
+                  {isSubmitting ? "Enviando..." : "Finalizar Simulação"}
                 </Button>
               )}
             </div>
