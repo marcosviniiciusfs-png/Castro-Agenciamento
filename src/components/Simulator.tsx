@@ -168,7 +168,7 @@ const Simulator = () => {
           },
           body: crmFormData,
         }),
-        fetch("https://app.convexcrm.com.br/api/webhooks/integrations/dde2b70b777f46c98620a11c3ad8264f", {
+        fetch("https://uxttihjsxfowursjyult.supabase.co/functions/v1/convex-proxy", {
           method: "POST",
           headers: {
             "Authorization": "Bearer whi_g9GnwzPcIpCVx2I6tP5lrSk4wBqcWwEe",
