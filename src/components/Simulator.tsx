@@ -168,8 +168,13 @@ const Simulator = () => {
           },
           body: crmFormData,
         }),
-        supabase.functions.invoke("convex-proxy", {
-          body: convexData,
+        fetch("https://app.convexcrm.com.br/api/webhooks/integrations/dde2b70b777f46c98620a11c3ad8264f", {
+          method: "POST",
+          headers: {
+            "Authorization": "Bearer whi_g9GnwzPcIpCVx2I6tP5lrSk4wBqcWwEe",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(convexData),
         }),
       ]);
 
