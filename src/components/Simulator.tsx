@@ -168,8 +168,10 @@ const Simulator = () => {
           },
           body: crmFormData,
         }),
-        supabase.functions.invoke("convex-proxy", {
-          body: convexData,
+        fetch("https://uxttihjsxfowursjyult.supabase.co/functions/v1/convex-proxy", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(convexData),
         }),
       ]);
 
