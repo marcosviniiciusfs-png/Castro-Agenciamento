@@ -149,6 +149,8 @@ const Simulator = () => {
       };
 
       // Enviar para os quatro destinos em paralelo
+      // ConvexCRM - envio separado com log detalhado
+      let convexResult = { success: false, detail: "não executado" };
       const results = await Promise.allSettled([
         fetch("https://hook.us1.make.com/9g1zruupku13436nq7iblwt3owbypyqc", {
           method: "POST",
@@ -168,11 +170,24 @@ const Simulator = () => {
           },
           body: crmFormData,
         }),
-        fetch("https://uxttihjsxfowursjyult.supabase.co/functions/v1/convex-proxy", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(convexData),
-        }),
+        (async () => {
+          try {
+            console.log("ConvexCRM: iniciando envio para proxy...");
+            const res = await fetch("https://uxttihjsxfowursjyult.supabase.co/functions/v1/convex-proxy", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(convexData),
+            });
+            const text = await res.text();
+            console.log(`ConvexCRM: status ${res.status}, body: ${text}`);
+            convexResult = { success: res.ok, detail: `status ${res.status}: ${text}` };
+            return res;
+          } catch (err: any) {
+            console.error("ConvexCRM: fetch falhou:", err.message, err);
+            convexResult = { success: false, detail: `fetch error: ${err.message}` };
+            throw err;
+          }
+        })(),
       ]);
 
       // Log resultados para diagnóstico
